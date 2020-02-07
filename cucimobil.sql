@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 05, 2020 at 01:59 PM
+-- Generation Time: Feb 07, 2020 at 03:31 AM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.2.11
 
@@ -32,8 +32,16 @@ CREATE TABLE `cucimobil` (
   `id` int(100) NOT NULL,
   `plat_mobil` varchar(100) NOT NULL,
   `nama_mobil` varchar(100) NOT NULL,
-  `jenis_cuci` varchar(100) NOT NULL
+  `jenis_cuci` varchar(100) NOT NULL,
+  `foto` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cucimobil`
+--
+
+INSERT INTO `cucimobil` (`id`, `plat_mobil`, `nama_mobil`, `jenis_cuci`, `foto`) VALUES
+(1, 'N 1234 FG', 'Ferrari F9 Tributo', 'Salon', '1200px-Ferrari_F8_Tributo_Genf_2019_1Y7A5665.jpg');
 
 --
 -- Indexes for dumped tables
@@ -53,7 +61,7 @@ ALTER TABLE `cucimobil`
 -- AUTO_INCREMENT for table `cucimobil`
 --
 ALTER TABLE `cucimobil`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
