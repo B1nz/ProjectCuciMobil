@@ -24,5 +24,4 @@ Route::post('/cucimobil/update', 'CuciMobilController@update');
 
 Route::get('/cucimobil/hapus/{id}', 'CuciMobilController@hapus');
 
-
 ?>
