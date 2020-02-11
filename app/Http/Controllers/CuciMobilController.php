@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CuciMobil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -9,8 +10,8 @@ class CuciMobilController extends Controller
 {
     public function index()
     {
-        // mengambil data dari table pegawai
-        $cucimobil = DB::table('cucimobil')->get();
+		// mengambil data dari table pegawai
+		$cucimobil = CuciMobil::paginate(10);
 
         // mengirim data pegawai ke view index
         return view('index', ['cucimobil' => $cucimobil]);
@@ -28,33 +29,36 @@ class CuciMobilController extends Controller
 	public function store(Request $request)
 	{
 		// insert data ke table pegawai
-		DB::table('cucimobil')->insert([
-			'cucimobil_plat_mobil' => $request->plat_mobil,
-			'cucimobil_nama_mobil' => $request->nama_mobil,
-			'cucimobil_jenis_cuci' => $request->jenis_cuci,
-			'cucimobil_foto' => $request->foto
+		$validator = Validator::make($request->all(), [
+			'plat_mobil' => 'required',
+			'nama_mobil' => 'required',
+			'jenis_mobil' => 'required'
 		]);
+		if ($validator->passes()) {
+			$cucimobil = CuciMobil::find($id);
+			$cucimobil->plat_mobil = $request->plat_mobil;
+			$cucimobil->nama_mobil = $request->nama_mobil;
+			$cucimobil->jenis_cuci = $request->jenis_cuci;
+			$cucimobil->foto = $request->foto;
+			$cucimobil->save();
 
-		$this->validate($request, [
-			'featured_image' => 'required|file|max:7000', // max 7MB
-		]);
-
-		$path = Storage::putFile(
-			'storage/Images',
-			$request->file('featured_image'),
-		);
-
-		// alihkan halaman ke halaman pegawai
-		return redirect('/cucimobil');
+			$request->session()->flash('msg', 'Sukses menambah data!');
+			return redirect('/cucimobil');
+		} else {
+			return redirect('/cucimobil');
+		}
 	
 	}
 
 	public function edit($id)
 	{
 		// mengambil data pegawai berdasarkan id yang dipilih
-		$cucimobil = DB::table('cucimobil')->where('cucimobil_id',$id)->get();
-		// passing data pegawai yang didapat ke view edit.blade.php
-		return view('edit',['cucimobil' => $cucimobil]);
+		$cucimobil = CuciMobil::where('id', $id)->first();
+		if (!$cucimobil) {
+			$request->session()->flash('errorMsg', 'Data tidak ditemukan!');
+			return view('edit', ['cucimobil' => $cucimobil]);		
+		}
+		return view('edit', ['cucimobil' => $cucimobil]);
 	
 	}
 
@@ -62,22 +66,39 @@ class CuciMobilController extends Controller
 	public function update(Request $request)
 	{
 		// update data pegawai
-		DB::table('cucimobil')->where('cucimobil_id',$request->id)->update([
-			'cucimobil_plat_mobil' => $request->plat_mobil,
-			'cucimobil_nama_mobil' => $request->nama_mobil,
-			'cucimobil_jenis_cuci' => $request->jenis_cuci
+		$validator = Validator::make($request->all(), [
+			'plat_mobil' => 'required',
+			'nama_mobil' => 'required',
+			'jenis_mobil' => 'required'
 		]);
-		// alihkan halaman ke halaman pegawai
-		return redirect('/cucimobil');
+		if($validator->passes()) {
+			$cucimobil = CuciMobil::find($id);
+			$cucimobil->plat_mobil = $request->plat_mobil;
+			$cucimobil->nama_mobil = $request->nama_mobil;
+			$cucimobil->jenis_cuci = $request->jenis_cuci;
+			$cucimobil->foto = $request->foto;
+			$cucimobil->save();
+
+			$request->session()->flash('msg', 'Sukses update!');
+			return redirect('/cucimobil');
+
+		} else {
+            return redirect('/cucimobil');
+        }
 	}
 
 	// method untuk hapus data pegawai
 	public function hapus($id)
 	{
 		// menghapus data pegawai berdasarkan id yang dipilih
-		DB::table('cucimobil')->where('cucimobil_id',$id)->delete();
-			
-		// alihkan halaman ke halaman pegawai
+		$cucimobil = CuciMobil::where('id', $id)->first();
+		if(!$cucimobil) {
+			$request->session()->flash('errorMsg', 'Gagal menghapus!');
+			return redirect('/cucimobil');
+		}
+		
+		CuciMobil::where('id', $id)->delete();
+		$request->session()->flash('Msg', 'Berhasil menghapus!');
 		return redirect('/cucimobil');
 	}
 
