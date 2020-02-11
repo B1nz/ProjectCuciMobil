@@ -12,6 +12,11 @@
 */
 
 //route CRUD
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
 Route::get('/cucimobil', 'CuciMobilController@index');
 
 Route::get('/cucimobil/tambah', 'CuciMobilController@tambah');
