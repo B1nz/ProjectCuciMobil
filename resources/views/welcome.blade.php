@@ -16,7 +16,12 @@
     </h1>
     <h3 align="center">
         <a href="/cucimobil/tambah"> + Tambah Data Baru</a>
-    </h3>
+	</h3>
+	<p>Cari Data :</p>
+	<form action="/cucimobil/cari" method="GET">
+		<input type="text" name="cari" placeholder="Cari Data .." value="{{ old('cari') }}">
+		<input type="submit" value="CARI">
+	</form>
 	<h3 align="center">
 		<table border="1">
 		<tr>
