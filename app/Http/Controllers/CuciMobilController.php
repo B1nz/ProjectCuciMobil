@@ -102,4 +102,18 @@ class CuciMobilController extends Controller
 		return redirect('/cucimobil');
 	}
 
+	public function cari(Request $request)
+	{
+		// menangkap data pencarian
+		$cari = $request->cari;
+
+		// mengambil data dari table pegawai sesuai pencarian data
+		$cucimobil = DB::table('cucimobil')
+			->where('cucimobil_plat_mobil', 'like', "%" . $cari . "%")
+			->paginate();
+
+		// mengirim data pegawai ke view index
+		return view('index', ['cucimobil' => $cucimobil]);
+	}
+
 }
