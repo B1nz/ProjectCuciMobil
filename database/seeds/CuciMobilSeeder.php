@@ -22,5 +22,24 @@ class CuciMobilSeeder extends Seeder
                 'cucimobil_jenis_cuci' => 'Salon'
             ]);
         }
+
+        $user = [
+            [
+                'name' => 'Admin',
+                'email' => 'admin@mail.com',
+                'is_admin' => '1',
+                'password' => bcrypt('1234567890'),
+            ],
+            [
+                'name' => 'User',
+                'email' => 'user@mail.com',
+                'is_admin' => '0',
+                'password' => bcrypt('1234567890'),
+            ],
+        ];
+
+        foreach ($user as $key => $value) {
+            User::create($value);
+        }
     }
 }
