@@ -6,7 +6,7 @@
 		beautiful and simple website using html only -- fullywrold web tutorials
 	</title>
 </head>
-<body background="1.jpg" link="#000" alink="#017bf5" vlink="#000">
+<body background="#000" link="#000" alink="#017bf5" vlink="#000">
 	<br />
 	<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 	<h1 align="center">
@@ -18,11 +18,12 @@
         <a href="/cucimobil"> Kembali</a>
     </h3>
 	<h3 align="center">
-		<form action="/cucimobil/store" method="post">
+		<form action="/cucimobil/store" method="post" enctype="multipart/form-data">
 		{{ csrf_field() }}
 		No. Plat Mobil <input type="text" name="plat_mobil" required="required"> <br/>
 		Nama Mobil <input type="text" name="nama_mobil" required="required"> <br/>
 		Janis Cuci <input type="text" name="jenis_cuci" required="required"> <br/>
+		Foto Mobil <input type="file" name="foto"> <br/>
 		<input type="submit" value="Simpan Data">
 	</form>
 	</h3>

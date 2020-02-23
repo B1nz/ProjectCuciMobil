@@ -6,7 +6,7 @@
 		beautiful and simple website using html only -- fullywrold web tutorials
 	</title>
 </head>
-<body background="1.jpg" link="#000" alink="#017bf5" vlink="#000">
+<body background="#000" link="#000" alink="#017bf5" vlink="#000">
 	<br />
 	<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 	<h1 align="center">
@@ -25,6 +25,7 @@
                 No. Plat Nomor <input type="text" required="required" name="plat_mobil" value="{{ $cm->cucimobil_plat_mobil }}"> <br/>
                 Nama Mobil <input type="text" required="required" name="nama_mobil" value="{{ $cm->cucimobil_nama_mobil }}"> <br/>
                 Jenis Cuci <input type="text" required="required" name="jenis_cuci" value="{{ $cm->cucimobil_jenis_cuci }}"> <br/>
+				Foto Mobil <input type="file" name="foto"> <br/>
                 <input type="submit" value="Simpan Data">
             </form>
 	@endforeach

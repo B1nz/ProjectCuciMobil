@@ -12,6 +12,13 @@
 */
 
 //route CRUD
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('admin/home', 'HomeController@adminHome')->name('admin.home')->middleware('is_admin');
+
 Route::get('/cucimobil', 'CuciMobilController@index');
 
 Route::get('/cucimobil/tambah', 'CuciMobilController@tambah');
@@ -24,5 +31,9 @@ Route::post('/cucimobil/update', 'CuciMobilController@update');
 
 Route::get('/cucimobil/hapus/{id}', 'CuciMobilController@hapus');
 
+Route::get('/cucimobil/cari','CuciMobilController@cari');
 
 ?>
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

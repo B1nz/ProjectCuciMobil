@@ -6,7 +6,7 @@
 		Data Cuci Mobil
 	</title>
 </head>
-<body background="1.jpg" link="#000" alink="#017bf5" vlink="#000">
+<body background="#000" link="#000" alink="#017bf5" vlink="#000">
 	<br />
 	<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 	<h1 align="center">
@@ -16,7 +16,12 @@
     </h1>
     <h3 align="center">
         <a href="/cucimobil/tambah"> + Tambah Data Baru</a>
-    </h3>
+	</h3>
+	<p>Cari Data :</p>
+	<form action="/cucimobil/cari" method="GET">
+		<input type="text" name="cari" placeholder="Cari Data .." value="{{ old('cari') }}">
+		<input type="submit" value="CARI">
+	</form>
 	<h3 align="center">
 		<table border="1">
 		<tr>
@@ -24,6 +29,7 @@
 			<th>Plat Mobil</th>
 			<th>Nama Mobil</th>
 			<th>Jenis Cuci</th>
+			<th>Foto Mobil</th>
 			<th>Edit</th>
 		</tr>
 		@foreach($cucimobil as $cm)
@@ -32,6 +38,8 @@
 			<td>{{ $cm->cucimobil_plat_mobil }}</td>
 			<td>{{ $cm->cucimobil_nama_mobil }}</td>
 			<td>{{ $cm->cucimobil_jenis_cuci }}</td>
+			<?php $path = Storage::url('Images/' {{ $cm->cucimobil_jenis_cuci }}); ?>
+            <th><img width="100px" src="{{ url($path) }}" alt="" srcset=""></th>
 			<td>
 				<a href="/cucimobil/edit/{{ $p->cucimobil_id }}">Edit</a>
 				|
