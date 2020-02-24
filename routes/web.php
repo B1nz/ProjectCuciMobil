@@ -14,7 +14,7 @@
 //route CRUD
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landing');
 });
 
 Route::get('/cucimobil', 'CuciMobilController@index');
